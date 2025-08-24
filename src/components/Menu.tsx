@@ -1,3 +1,10 @@
+"use client";
+
+import { useSidebar } from "@/context/SidebarContext";
+import Image from "next/image";
+import Link from "next/link";
+import clsx from "clsx";
+
 const menuItems = [
   {
     title: "MENU",
@@ -112,3 +119,44 @@ const menuItems = [
     ],
   },
 ];
+
+const Menu = () => {
+  const { showSidebar } = useSidebar();
+
+  return (
+    <div className="mt-4 text-sm">
+      {menuItems.map((section) => (
+        <div key={section.title} className="flex flex-col gap-2">
+          {/* Section title */}
+          <span
+            className={clsx(
+              "hidden text-gray-400 font-light my-4 lg:block",
+              showSidebar && "lg:hidden"
+            )}
+          >
+            {section.title}
+          </span>
+
+          {/* Menu items */}
+          {section.items.map((menu) => (
+            <Link
+              key={menu.label}
+              href={menu.href}
+              className={clsx(
+                "flex items-center gap-4 text-gray-500 py-2 justify-center",
+                showSidebar ? "lg:justify-center" : "lg:justify-start"
+              )}
+            >
+              <Image src={menu.icon} alt={menu.label} width={20} height={20} title={menu.label} />
+              <span className={clsx("hidden lg:block", showSidebar && "lg:hidden")}>
+                {menu.label}
+              </span>
+            </Link>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Menu;
