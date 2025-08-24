@@ -15,7 +15,7 @@ export default function DashboardContent({ children }: { children: React.ReactNo
       {/* Sidebar */}
       <div
         className={clsx(
-          "p-4 w-[12%] md:w-[8%]",
+          "min-w-[56px] p-4 w-[12%] md:w-[8%]",
           showSidebar ? "lg:w-[5%] xl:w-[4%]" : "lg:w-[16%] xl:w-[14%]"
         )}
       >
